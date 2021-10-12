@@ -22,7 +22,9 @@ worker.addEventListener('error', (...args) => {
 	el.innerHTML = '😢 Aw, snap! Worker encountered an error.';
 });
 
-worker.addEventListener('message', ({ data }) => {
+worker.addEventListener('message', ({ target, data }) => {
+	if (target !== worker) return;
+
 	if (data.html) {
 		console.log('[MAIN] Received HTML', data.html);
 		mo.disconnect();

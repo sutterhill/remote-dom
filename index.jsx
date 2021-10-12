@@ -32,5 +32,3 @@ worker.addEventListener('message', ({ data }) => {
 		// TODO deserialize and apply mutations
 	}
 });
-
-worker.postMessage('foo');

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 importScripts('jsdom.bundled.js');
 
 console.log('[WORKER] Starting');
-const dom = new JSDOM(`<!DOCTYPE html><div id="react-container">...</div></html>`);
+const dom = new JSDOM(`<!DOCTYPE html><div id="react-container"></div></html>`);
 globalThis.window = dom.window;
 
 function TimeWidget() {

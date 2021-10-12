@@ -12,7 +12,7 @@
 		<p><button onclick="this.disabled = true; document.querySelector('#remote-dom').innerHTML =+ ' ';">Interfere with DOM</button></p>
 
 		<div style="border:1px dotted grey;">
-			<div id="remote-dom"></div>
+			<RemoteDom src="./worker.bundled.js" />
 		</div>
 	</body>
 	<script src="./index.bundled.js" type="module"></script>

@@ -12,5 +12,5 @@ npx esbuild \
 	--outdir=. \
 	--out-extension:.js=.bundled.js \
 	--bundle index.jsx \
-	--bundle worker.jsx \
+	--bundle time-widget.jsx \
 	$WATCH

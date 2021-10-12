@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 set -xeuo pipefail
 
+WATCH=""
+if [ "${1:-}" = "--watch" ]; then
+	WATCH="--watch"
+fi
+
 cd "$(git rev-parse --show-toplevel)"
 npx browserify jsdom.src.js -o jsdom.bundled.js
-npx esbuild --bundle index.jsx --outfile=index.bundled.js
-npx esbuild --bundle worker.jsx --outfile=worker.bundled.js
+npx esbuild \
+	--outdir=. \
+	--out-extension:.js=.bundled.js \
+	--bundle index.jsx \
+	--bundle worker.jsx \
+	$WATCH

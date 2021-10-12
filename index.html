@@ -3,17 +3,30 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Remote DOM playground</title>
+		<style>
+			remotedom {
+				border: 1px dotted grey;
+				display: block;
+				margin: 1em 0;
+			}
+		</style>
+		<script>
+			document.documentElement.addEventListener('click', (e) => {
+				if (e.target.matches('remotedom *')) {
+					e.target.innerHTML += ' ';
+				}
+			});
+		</script>
 	</head>
 	<body>
-		<p>Hello, world! The dotted box below is a Remote DOM node. Its HTML is coming
+		<p>Hello, world! The dotted boxes below are Remote DOM nodes. Their HTML comes
 			from a Web Worker. If anyone else touches its DOM, we'll terminate the
-			worker and remove the HTML.</p>
+			worker and remove the HTML -- click inside one of the boxes to try it!</p>
 
-		<p><button onclick="this.disabled = true; document.querySelector('#remote-dom').innerHTML =+ ' ';">Interfere with DOM</button></p>
-
-		<div style="border:1px dotted grey;">
-			<RemoteDom src="./time-widget.bundled.js" />
-		</div>
+			<!-- You can have more than one copy of a widget; they are independent -->
+			<RemoteDOM src="./time-widget.bundled.js"></RemoteDOM>
+			<RemoteDOM src="./counter.bundled.js" a="hello" b="world"></RemoteDOM>
+			<RemoteDOM src="./time-widget.bundled.js"></RemoteDOM>
 	</body>
 	<script src="./index.bundled.js" type="module"></script>
 </html>

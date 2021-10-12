@@ -1,0 +1,8 @@
+.cache
+.DS_Store
+.parcel-cache
+*.bundled.js
+dist
+node_modules
+
+

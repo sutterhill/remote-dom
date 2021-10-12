@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Remote DOM playground</title>
+	</head>
+	<body>
+		<p>Hello, world! The dotted box below is a Remote DOM node. Its HTML is coming
+			from a Web Worker. If anyone else touches its DOM, we'll terminate the
+			worker and remove the HTML.</p>
+
+		<p><button onclick="this.disabled = true; document.querySelector('#remote-dom').innerHTML =+ ' ';">Interfere with DOM</button></p>
+
+		<div style="border:1px dotted grey;">
+			<div id="remote-dom"></div>
+		</div>
+	</body>
+	<script src="./index.js" type="module"></script>
+</html>

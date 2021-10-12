@@ -1,7 +1,16 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 importScripts('jsdom.bundled.js');
 
 console.log('[WORKER] Starting');
-const dom = new JSDOM(`<!DOCTYPE html><body>The time is <span id="time">${new Date()}</span></body>`);
+const dom = new JSDOM(`<!DOCTYPE html><div id="react-container">...</div></html>`);
+globalThis.window = dom.window;
+
+function renderReact() {
+	const el = dom.window.document.querySelector('#react-container');
+	ReactDOM.render(<p>The time is <span id="time">{(new Date()).toString()}</span></p>, el);
+}
 
 function sendHTML() {
 	postMessage({
@@ -24,8 +33,10 @@ function mutationCallback(mutations) {
 	sendHTML();
 }
 const mo = new dom.window.MutationObserver(mutationCallback);
-mo.observe(dom.window.document, { attributes: true, childList: true, subtree: true });
+mo.observe(dom.window.document.body, { attributes: true, childList: true, subtree: true, characterData: true });
+
+renderReact();
 
 setInterval(() => {
-	dom.window.document.querySelector('#time').innerHTML = new Date();
+	renderReact();
 }, 1000);

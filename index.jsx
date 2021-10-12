@@ -1,8 +1,9 @@
 console.log('[MAIN] Starting');
 
 const el = document.querySelector('#remote-dom');
+
 const mo = new MutationObserver(mutationCallback);
-const worker = new Worker('./worker.js')
+const worker = new Worker('./worker.bundled.js')
 
 function mutationCallback() {
 	// Hey! No one else is allowed to touch our DOM
@@ -13,7 +14,8 @@ function mutationCallback() {
 	el.innerHTML = '😢 Aw, snap! Someone else mutated the DOM.';
 }
 
-worker.addEventListener('error', () => {
+worker.addEventListener('error', (...args) => {
+	console.error('[MAIN] Worker error:', ...args);
 	worker.terminate();
 	mo.disconnect();
 	el.style.border = '1px solid red;';
